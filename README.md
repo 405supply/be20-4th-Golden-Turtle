@@ -330,6 +330,10 @@ GUMMA PPT 바로가기 [여기](https://gamma.app/docs/-cqgiskvr2jkfztx)에서 �
 
 📱 CI/CD 테스트
 
+<img width="1898" height="906" alt="image" src="https://github.com/user-attachments/assets/63d34fa7-cc06-47d5-af61-a0a11520f31a" />
+
+
+
 ## ⚠️ **8. 트러블 슈팅**
 
 <details>
