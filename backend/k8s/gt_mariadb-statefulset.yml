@@ -1,0 +1,101 @@
+# k8s/infra/mariadb-statefulset.yml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb
+spec:
+  serviceName: mariadb
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      initContainers:
+        - name: set-role
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              HOSTNAME=$(hostname)
+              if [ "$HOSTNAME" = "mariadb-0" ]; then
+                echo "Setting MASTER config"
+                cp /config/master.cnf /mnt/config/my.cnf
+              else
+                echo "Setting SLAVE config"
+                cp /config/slave.cnf /mnt/config/my.cnf
+              fi
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: config-out
+              mountPath: /mnt/config
+
+      containers:
+        - name: mariadb
+          image: mariadb:10.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              value: root
+            - name: MARIADB_DATABASE
+              value: goldenturtle
+            - name: MARIADB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_USERNAME
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_PASSWORD
+
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: db-storage
+            - mountPath: /etc/mysql/conf.d
+              name: config-out
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          livenessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 6
+
+          readinessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+
+      volumes:
+        - name: config
+          configMap:
+            name: mariadb-config
+        - name: config-out
+          emptyDir: {}
+
+  volumeClaimTemplates:
+    - metadata:
+        name: db-storage
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi

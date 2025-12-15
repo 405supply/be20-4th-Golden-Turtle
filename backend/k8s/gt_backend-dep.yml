@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gold-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gold-backend
+  template:
+    metadata:
+      labels:
+        app: gold-backend
+    spec:
+      containers:
+        - name: gold-backend
+          image: rkdtjdgus0824/gold-backend:1.0.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: service-config
+            - secretRef:
+                name: db-secret
+            - secretRef:
+                name: finnhub-secret
+            - secretRef:
+                name: mail-secret
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: 30
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3

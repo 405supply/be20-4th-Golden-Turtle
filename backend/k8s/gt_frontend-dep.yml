@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gold-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gold-frontend
+  template:
+    metadata:
+      labels:
+        app: gold-frontend
+    spec:
+      containers:
+        - name: gold-frontend
+          image: rkdtjdgus0824/gold-frontend:1.0.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"

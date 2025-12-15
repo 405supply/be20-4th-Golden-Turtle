@@ -1,0 +1,16 @@
+# k8s/infra/mariadb-config.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-config
+data:
+  master.cnf: |
+    [mysqld]
+    log-bin=mysql-bin
+    server-id=1
+
+  slave.cnf: |
+    [mysqld]
+    server-id=2
+    relay-log=mysql-relay-bin
+    read_only=1

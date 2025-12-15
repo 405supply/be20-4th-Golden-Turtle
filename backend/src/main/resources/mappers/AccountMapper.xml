@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.goldenturtle.domain.Account.query.mapper.AccountMapper">
+    <!-- 🔹 별칭 방식 + resultType -->
+    <select id="findHoldingsByUserId"
+            resultType="HoldingDTO">
+
+        SELECT
+        -- HoldingDTO 기본 필드
+        h.holding_id AS holdingId,
+        h.quantity AS quantity,
+        h.avg_price AS avgPrice,
+        h.created_at AS createdAt,
+        h.updated_at AS updatedAt,
+
+        -- StockDTO (HoldingDTO.stock.*)
+        st.stock_id AS "stock.stockId",
+        st.ticker AS "stock.ticker"
+
+        FROM tb_holding h
+        JOIN tb_stock st
+        ON h.stock_id = st.stock_id
+        JOIN tb_game_session se
+        ON h.session_id = se.session_id
+
+        WHERE se.user_id = #{userId}
+        AND se.status = 'ACTIVE'
+
+    </select>
+    <select id = "findTradesBySessionId"
+            resultType="TradeDTO">
+        SELECT
+        t.trade_id,
+        t.session_id,
+        t.user_id,
+        t.stock_id,
+        t.side,
+        t.quantity,
+        t.price,
+        t.amount,
+        t.created_at,
+
+        s.stock_id AS "stock.stockId",
+        s.ticker AS "stock.ticker"
+
+        FROM tb_trade t
+        JOIN tb_stock s
+        ON t.stock_id = s.stock_id
+        WHERE t.session_id = #{gameSessionId}
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectCashBalanceByUserId"
+            resultType="java.math.BigDecimal">
+        SELECT
+        cash_balance
+        FROM tb_game_session
+        WHERE user_id = #{userId}
+        AND status = 'ACTIVE'
+    </select>
+
+    <select id="countHoldings" resultType="long">
+        SELECT COUNT(*)
+        FROM tb_holding a
+        WHERE a.session_id = #{gameSessionId}
+    </select>
+
+    <select id="countTrades" resultType="long">
+        SELECT COUNT(*)
+        FROM tb_trade a
+        WHERE a.session_id = #{gameSessionId}
+    </select>
+
+    <select id="findGameSessionByUserId" resultType="GameSessionDTO">
+        SELECT
+            session_id,
+            user_id,
+            initial_cash,
+            cash_balance,
+            status,
+            started_at,
+            ended_at,
+            final_asset,
+            total_return
+        FROM
+            tb_game_session
+        WHERE
+            user_id = #{userId}
+        ORDER BY
+            started_at DESC
+    </select>
+
+    <select id="countGameSession" resultType="long">
+        SELECT
+            COUNT(*)
+        FROM
+            tb_game_session
+        WHERE
+            user_id = #{userId}
+    </select>
+
+</mapper>

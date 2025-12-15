@@ -1,0 +1,14 @@
+# k8s/base/configmap.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-config
+data:
+  SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb-0.mariadb:3306/goldenturtle"
+  RABBITMQ_HOST: "rabbitmq"
+  RABBITMQ_PORT: "5672"
+  SPRING_PROFILES_ACTIVE: "k8s"
+  SPRING_DATA_REDIS_HOST: "redis"
+  SPRING_DATA_REDIS_PORT: "6379"
+
+

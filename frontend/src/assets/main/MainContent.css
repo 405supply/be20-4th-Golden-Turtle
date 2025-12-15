@@ -1,0 +1,123 @@
+/* =========================================
+   브라우저 스크롤 완전 제거
+========================================= */
+html, body {
+    height: 100%;
+    overflow: hidden; /* 화면 스크롤 절대 생성 안됨 */
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   전체 wrapper
+========================================= */
+.main-wrapper {
+    width: 100%;
+    color: #f6c749;
+
+    /* 타이틀 위 여백 제거 */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+
+    /* 화면 전체 높이 안에 배치 */
+    height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   중앙 콘텐츠 wrapper
+========================================= */
+.content-center {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+
+    flex: 1; /* 화면 채우기 */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* =========================================
+   메인 타이틀
+========================================= */
+.main-title {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.1;
+
+    /* 🔥 여백 축소: 30px → 15px */
+    margin-bottom: 15px;
+
+    color: #f6c749;
+}
+
+/* =========================================
+   Ranking 제목
+========================================= */
+.ranking-section-title {
+    font-size: 32px;
+    font-weight: 900;
+    /* 🔥 여백 축소: 18px → 10px */
+    margin-bottom: 10px;
+    color: #f6c749;
+}
+
+/* =========================================
+   테이블 전체 박스
+========================================= */
+.ranking-table {
+    width: 100%;
+    border: 2px solid rgba(216, 167, 40, 0.5);
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    /* 🔥 패딩 축소: 16px 20px → 10px 15px */
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   랭킹 높이 (5명 기준으로 재조정)
+========================================= */
+.ranking-fixed-height {
+    height: 360px !important; /* 이 값은 유지하여 5행을 표시 */
+    overflow: hidden;
+}
+/* =========================================
+   헤더 영역
+========================================= */
+.ranking-table-header {
+    display: grid;
+    grid-template-columns: 120px 1fr 200px 160px;
+    /* 🔥 패딩 축소: 12px 0 → 8px 0 */
+    padding: 8px 0;
+    border-bottom: 2px solid rgba(216, 167, 40, 0.5);
+
+    color: #f6c749;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* =========================================
+   데이터 행
+========================================= */
+.ranking-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 200px 160px;
+    /* 🔥 패딩 축소: 14px 0 → 10px 0 */
+    padding: 10px 0;
+    color: white;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.ranking-row:last-child {
+    border-bottom: none;
+}
+
+/* 오른쪽 정렬 칼럼 */
+.right {
+    text-align: right;
+}
