@@ -330,6 +330,12 @@ GUMMA PPT 바로가기 [여기](https://gamma.app/docs/-cqgiskvr2jkfztx)에서 �
 
 📱 CI/CD 테스트
 
+<img width="1898" height="906" alt="image" src="https://github.com/user-attachments/assets/63d34fa7-cc06-47d5-af61-a0a11520f31a" />
+<img width="1837" height="703" alt="image" src="https://github.com/user-attachments/assets/3848dd0b-c33a-49b5-b46f-30d967cb6f20" />
+
+
+
+
 ## ⚠️ **8. 트러블 슈팅**
 
 <details>
@@ -488,7 +494,14 @@ GUMMA PPT 바로가기 [여기](https://gamma.app/docs/-cqgiskvr2jkfztx)에서 �
     이 경험을 통해 최종 프로젝트에서는 기술적인 준비 뿐만 아니라 체계적인 문서화와 함께 팀원들과 보다 적극적으로 소통해야겠다고 느꼈다.
     
 </details>
+<details>
+<summary> 최지원 </summary>
 
+    Websocket 기반 실시간 통신을 아직 해보지 않아 아쉬운 마음이 컷는데, 이번 프로젝트에서 해당 부분을 전담하여 개발을 이어나가 기술적 성취도가 있었습니다.
+    또한 평소에 만들어보고 싶었던 것들 중 하나를 실제로 만들 수 있게 되어 즐기면서 구현할 수 있었습니다.
+    추가로 새로운 팀원분들과 합을 맞추면서 소통과 협업 방법론에 대해서 다시 한번 더 생각해보는 계기가 되었습니다.
+    
+</details>
 
 
 
