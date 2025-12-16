@@ -6,7 +6,7 @@ pipeline {
         IMAGE_NAME = "goldenturtle:latest"
 
         // Jenkins Credentials (Docker Registry password ID)
-        DOCKER_PASSWORD = credentials('docker-password')
+        DOCKER_PASSWORD = credentials("docker-password")
 
         // Docker Registry username
         DOCKER_USERNAME = "jiwonchoi0"
