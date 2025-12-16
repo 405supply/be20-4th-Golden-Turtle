@@ -64,7 +64,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             when {
-                expression { fileExists('k8s') }
+                expression { fileExists('backend/Dockerfile') }
             }
             steps {
                 // powershell """
