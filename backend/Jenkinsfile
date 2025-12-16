@@ -10,6 +10,7 @@ pipeline {
 
         // Docker Registry username
         DOCKER_USERNAME = "jiwonchoi0"
+
     }
 
     stages {
@@ -38,8 +39,8 @@ pipeline {
             steps {
                 script {
                     def image = env.IMAGE_NAME
-                    def context = env.WORKSPACE
-                    powershell "docker build -t ${image} \"${context}\""
+                    def context = 'backend'
+                    powershell "docker build -t ${image} -f ${context}/Dockerfile ${context}"
                 }
             }
         }
