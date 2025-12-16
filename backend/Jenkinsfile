@@ -33,7 +33,7 @@ pipeline {
 
         stage('Docker Build') {
             when {
-                expression { fileExists('Dockerfile') }
+                expression { fileExists('backend/Dockerfile') }
             }
             steps {
                 script {
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Docker Push') {
             when {
-                expression { fileExists('Dockerfile') }
+                expression { fileExists('backend/Dockerfile') }
             }
             steps {
                 script {
