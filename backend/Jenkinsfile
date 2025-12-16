@@ -20,13 +20,13 @@ pipeline {
             }
         }
 
-        stage('Docker Login') {
-            steps {
-                powershell """
-                    echo \$env:DOCKER_PASSWORD | docker login -u \$env:DOCKER_USERNAME --password-stdin
-                """
-            }
-        }
+        // stage('Docker Login') {
+        //     steps {
+        //         powershell """
+        //             echo \$env:DOCKER_PASSWORD | docker login -u \$env:DOCKER_USERNAME --password-stdin
+        //         """
+        //     }
+        // }
 
         stage('Docker Build') {
             when {
@@ -41,19 +41,19 @@ pipeline {
             }
         }
 
-        stage('Docker Push') {
-            when {
-                expression { fileExists('Dockerfile') }
-            }
-            steps {
-                script {
-                    def image = env.IMAGE_NAME
-                    powershell """
-                        docker push ${image}
-                    """
-                }
-            }
-        }
+        // stage('Docker Push') {
+        //     when {
+        //         expression { fileExists('Dockerfile') }
+        //     }
+        //     steps {
+        //         script {
+        //             def image = env.IMAGE_NAME
+        //             powershell """
+        //                 docker push ${image}
+        //             """
+        //         }
+        //     }
+        // }
 
         stage('Deploy to Kubernetes') {
             when {
