@@ -25,6 +25,9 @@ pipeline {
                 // powershell """
                 //     echo \$env:DOCKER_PASSWORD | docker login -u \$env:DOCKER_USERNAME --password-stdin
                 // """
+                powershell """
+                        echo hello
+                """
             }
         }
 
@@ -51,6 +54,9 @@ pipeline {
                     // powershell """
                     //     docker push ${image}
                     // """
+                    powershell """
+                            echo hello
+                    """
                 }
             }
         }
@@ -66,6 +72,9 @@ pipeline {
 
                 //     kubectl apply -f k8s/
                 // """
+                powershell """
+                            echo hello
+                """
             }
         }
     }
