@@ -330,8 +330,8 @@ GUMMA PPT 바로가기 [여기](https://gamma.app/docs/-cqgiskvr2jkfztx)에서 �
 
 📱 CI/CD 테스트
 
-<img width="1898" height="906" alt="image" src="https://github.com/user-attachments/assets/63d34fa7-cc06-47d5-af61-a0a11520f31a" />
 <img width="1837" height="703" alt="image" src="https://github.com/user-attachments/assets/3848dd0b-c33a-49b5-b46f-30d967cb6f20" />
+<img width="1124" height="742" alt="image" src="https://github.com/user-attachments/assets/2b190c8a-9862-4af1-938f-1f49fdc71533" />
 
 
 
